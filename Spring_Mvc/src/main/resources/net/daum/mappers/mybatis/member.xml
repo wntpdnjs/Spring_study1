@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member"> <!-- 매퍼 네임스페이스 명을 Member로 지정함. -->
+<!-- mybatis 쿼리문을 다루는 태그를 mapper(매퍼)태그라고 부른다.  -->
+
+	<!-- 회원저장 -->
+	<insert id = "m_in" parameterType="member">
+	insert into tbl_member(userid, userpw,username, email, regdate)
+	value(#{userid},#{userpw},#{username},#{email},sysdate)
+	
+	</insert>
+  
+</mapper>

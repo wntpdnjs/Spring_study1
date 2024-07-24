@@ -16,5 +16,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select id="reply_list" parameterType="int" resultType="reply"> <!-- resultType은 반환타입이다.생략불가능 -->
     select * from tbl_reply where bno=#{bno} order by rno desc
   </select>  
+  
+  <!-- 댓글 번호 기준으로 댓글 내용과 댓글 수정 날짜를 수정 -->
+  <update id = "reply_edit" parameterType="reply">
+  update tbl_reply set replytext=#{replytext} , updatedate=sysdate where rno=#{rno}
+  </update> 
+  
+  <!-- 댓글번호 기준으로 삭제 -->
+  <delete id="reply_del" parameterType="int">
+  delete from tbl_reply where rno=#{rno}
  
+  </delete>
+   <!-- 댓글번호 기준으로 게시판 번호를 구함 -->
+   <select id="reply_bno" resultType="int">
+   select bno from tbl_reply where rno=#{rno}
+   
+   </select>
+    
+  
 </mapper>

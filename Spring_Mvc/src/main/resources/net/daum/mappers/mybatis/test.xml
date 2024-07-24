@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Test">
+
+<insert id="test_in" parameterType="net.daum.vo.TestVO">
+insert into tbl_test (test_no,test_title,test_cont) values(test_no_seq.nextval,#{test_title},#{test_cont})
+</insert>
+
+
+</mapper>

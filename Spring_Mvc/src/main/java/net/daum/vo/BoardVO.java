@@ -13,6 +13,7 @@ public class BoardVO { // tbl_board 게시판 테이블 칼럼명과 일치하�
 	private String content;
 	private int viewcnt;
 	private String regdate;
+	private int replycnt; //댓글수
 	
 	//페이징 쪽 나누기 관련변수
 	private int startrow; //시작행 번호

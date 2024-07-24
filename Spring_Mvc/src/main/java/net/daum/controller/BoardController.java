@@ -97,14 +97,19 @@ public class BoardController {
       cm.addObject("bc", bc);
       
       if(state.equals("cont")) {
-    	  cm.setViewName("board/board_cont"); // 뷰리졸브(뷰페이지) 경로는 
+    	  //cm.setViewName("board/board_cont"); // 뷰리졸브(뷰페이지) 경로는
+    	  cm.setViewName("board/board_cont2");
+    	  
+    	 /* 문제 ) 모든 게시물 내용에 대한 댓글 기능이 되게 만들어보자
+    	  * 
+    	  */
       }else if (state.equals("edit")) {//수정폼
     	  cm.setViewName("board/board_edit");
       }
       		
       return cm;
    } //board_cont()
-   
+   	
    
    //게시판 수정 완료
    @RequestMapping(value="/board_edit_ok",method=RequestMethod.POST) //POSt 로 저븐하는 매핑주소 철

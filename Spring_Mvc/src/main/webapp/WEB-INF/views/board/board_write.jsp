@@ -33,6 +33,7 @@
   }
  </script>
 </head>
+
 <body>
   <h2>스프링 MVC게시판 입력</h2>
   <form method="post" action="board_write_ok" onsubmit="return check();" >

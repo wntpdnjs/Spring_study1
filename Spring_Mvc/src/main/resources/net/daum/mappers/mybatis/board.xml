@@ -15,17 +15,13 @@ insert into tbl_board (bno,writer,title,content,regdate) values(bno_seq.nextval,
 select count(bno) from tbl_board <!-- 오라클에서 count 함수는 총 레코드 개수를 구한다 -->
 </select>
 
-
 <!-- 게시판 목록 -->
 <select id = "b_list" resultType="board">
-select*from
-(select rowNum rNum,bno,writer,title,viewcnt,regdate from
-(select*from tbl_board order by bno desc))
+select * from
+(select rowNum rNum, bno, writer, title, viewcnt, regdate,replycnt from
+(select * from tbl_board order by bno desc))
 where rNum &gt;=#{startrow} and rNum &lt;=#{endrow}
-<!--&gt; =은 >= &lt;은 <=  -->
-
-
-
+<!-- &gt; =은 >= &lt;은 <=  -->
 </select>
 
 <!-- 조회수 증가 -->
@@ -33,14 +29,14 @@ where rNum &gt;=#{startrow} and rNum &lt;=#{endrow}
 update tbl_board set viewcnt=viewcnt+1 where bno=#{bno}
 </update>
 
-<!--  내용보기 -->
-<select id = "b_cont" resultType="board" >
+<!-- 내용보기 -->
+<select id = "b_cont" resultType="board">
 select * from tbl_board where bno=#{bno}
 </select>
 
-<!--  수정 -->
-<update id = "b_edit" >
-	update tbl_board set writer=#{writer}, title=#{title}, content=#{content} where bno=#{bno}
+<!-- 수정 -->
+<update id = "b_edit">
+update tbl_board set writer=#{writer}, title=#{title}, content=#{content} where bno=#{bno}
 </update>
 
 <!-- 삭제 -->
@@ -48,5 +44,9 @@ select * from tbl_board where bno=#{bno}
 delete from tbl_board where bno=#{bno}
 </delete>
 
+<!-- 댓글 수 1 증가 감소 -->
+<update id="upReplyCnt" parameterType="java.util.HashMap">
+update tbl_board set replycnt=replycnt+#{count} where bno=#{bno}
+</update>
 
 </mapper>

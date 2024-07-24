@@ -20,5 +20,7 @@ public interface BoardDAO {
 
 	void delBoard(int bno);
 
+	void updateReplyCnt(int bno, int count);
+
 
 }

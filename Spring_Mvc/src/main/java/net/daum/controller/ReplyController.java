@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,6 +59,43 @@ public class ReplyController {
 		}
 		return entity;
 	}//getReplyList()
+	
+	//대ㅐㅅ글 번호 기준으로 댓글 내용 수정
+	@PutMapping("/editReply/{rno}")
+	public ResponseEntity<String> deitReply(@PathVariable("rno")int rno, @RequestBody ReplyVO vo){
+		ResponseEntity<String> entity=null;
+		try {
+			vo.setRno(rno);
+			this.replyService.updateReply(vo);
+			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK); //댓글 저장 성공시 SUCCESS문자와 200 정상상태 코드 반환
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	} //editReply()
+	
+	//댓글 번호 기준으로 삭제
+	@DeleteMapping("/delReply/{rno}")
+	public ResponseEntity<String> del(@PathVariable("rno")int rno){
+		ResponseEntity<String> entity=null;
+		try {
+			
+			this.replyService.deleteReply(rno); //댓 번호 기준으로 삭제
+			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK); //댓글 저장 성공시 SUCCESS문자와 200 정상상태 코드 반환
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+		
+	
+	}//del()
+	
+	
+	
 }
 
 

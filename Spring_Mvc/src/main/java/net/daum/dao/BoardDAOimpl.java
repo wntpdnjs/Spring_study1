@@ -1,6 +1,8 @@
 package net.daum.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +60,15 @@ public class BoardDAOimpl implements BoardDAO {
 
 		
 	}//게시판 삭제
+
+	@Override
+	public void updateReplyCnt(int bno, int count) {
+		Map<String,Object> pm=new HashMap<>();
+		
+		pm.put("bno", bno); //게시판 번호 저장
+		pm.put("count", count); //댓글 수 +1, -1
+		this.sqlSession.update("upReplyCnt",pm);
+	}//댓글 수 1증가, 감소
    
 	
    
